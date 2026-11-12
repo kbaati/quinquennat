@@ -1,51 +1,48 @@
-import { useEffect, useState } from 'react'
-import { fetchHealth, type Health } from './api.ts'
+import type { MouseEvent } from 'react'
+import Compose from './pages/Compose.tsx'
+import Results from './pages/Results.tsx'
+import { navigate, usePath } from './router.ts'
 
-type State = { kind: 'loading' } | { kind: 'loaded'; health: Health } | { kind: 'backend-down' }
-
-function Status({ ok }: { ok: boolean }) {
-  return <span className={ok ? 'status-ok' : 'status-ko'}>{ok ? 'ok' : 'indisponible'}</span>
+function Page({ path }: { path: string }) {
+  const result = path.match(/^\/s\/([a-z0-9]+)\/?$/)
+  if (result) {
+    return <Results key={result[1]} id={result[1]} />
+  }
+  if (path === '/') {
+    return <Compose />
+  }
+  return (
+    <>
+      <h1>Page introuvable</h1>
+      <p>Cette adresse ne correspond à aucune page.</p>
+    </>
+  )
 }
 
 function App() {
-  const [state, setState] = useState<State>({ kind: 'loading' })
+  const path = usePath()
 
-  useEffect(() => {
-    let cancelled = false
-    fetchHealth()
-      .then((health) => !cancelled && setState({ kind: 'loaded', health }))
-      .catch(() => !cancelled && setState({ kind: 'backend-down' }))
-    return () => {
-      cancelled = true
-    }
-  }, [])
-
-  const engine = state.kind === 'loaded' ? state.health.engine : null
+  function goHome(event: MouseEvent) {
+    event.preventDefault()
+    navigate('/')
+  }
 
   return (
-    <main>
-      <h1>Quinquennat</h1>
-      <p className="subtitle">État des services</p>
-      {state.kind === 'loading' ? (
-        <p>Vérification en cours…</p>
-      ) : (
-        <ul className="status-list">
-          <li data-testid="backend">
-            <span>Backend</span>
-            <Status ok={state.kind === 'loaded'} />
-          </li>
-          <li data-testid="engine">
-            <span>Moteur de calcul</span>
-            <Status ok={engine?.status === 'ok'} />
-            {engine?.status === 'ok' && (
-              <span className="versions">
-                OpenFisca-France {engine.openfiscaFrance} · OpenFisca-Core {engine.openfiscaCore}
-              </span>
-            )}
-          </li>
-        </ul>
-      )}
-    </main>
+    <>
+      <header className="site-header">
+        <a href="/" onClick={goHome} className="site-title">
+          Quinquennat
+        </a>
+        <span className="site-tagline">Un programme, des foyers types, des euros</span>
+      </header>
+      <main>
+        <Page path={path} />
+      </main>
+      <footer className="site-footer">
+        Outil indépendant et non partisan. Aucune donnée personnelle n'est collectée. Code source sous licence
+        AGPL-3.0.
+      </footer>
+    </>
   )
 }
 

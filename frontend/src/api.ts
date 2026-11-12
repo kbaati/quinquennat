@@ -1,18 +1,80 @@
-export type ServiceStatus = 'ok' | 'unavailable'
+export interface Lever {
+  id: string
+  groupe: string
+  libelle: string
+  description: string
+  unite: string
+  valeurActuelle: number
+  min: number
+  max: number
+  pas: number
+}
 
-export interface Health {
-  backend: ServiceStatus
-  engine: {
-    status: ServiceStatus
-    openfiscaCore: string | null
-    openfiscaFrance: string | null
+export type Amounts = Record<string, number>
+
+export interface HouseholdResult {
+  id: string
+  nom: string
+  description: string
+  avant: Amounts
+  apres: Amounts
+  ecartRevenuDisponible: number
+}
+
+export interface ProgramItem {
+  levier: string
+  groupe: string
+  libelle: string
+  unite: string
+  valeurActuelle: number
+  valeur: number
+  parametre: string
+}
+
+export interface Simulation {
+  id: string
+  creeLe: string
+  annee: number
+  programme: ProgramItem[]
+  versions: { openfiscaCore: string; openfiscaFrance: string }
+  foyers: HouseholdResult[]
+}
+
+export class ApiError extends Error {
+  readonly status: number
+
+  constructor(status: number, message: string) {
+    super(message)
+    this.status = status
   }
 }
 
-export async function fetchHealth(): Promise<Health> {
-  const response = await fetch('/api/sante')
+async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  let response: Response
+  try {
+    response = await fetch(path, init)
+  } catch {
+    throw new ApiError(0, 'Le service est injoignable. Vérifiez votre connexion puis réessayez.')
+  }
   if (!response.ok) {
-    throw new Error(`GET /api/sante: HTTP ${response.status}`)
+    const problem = await response.json().catch(() => null)
+    throw new ApiError(response.status, problem?.detail ?? `Le service a répondu par une erreur (${response.status}).`)
   }
   return response.json()
+}
+
+export function fetchLevers(): Promise<Lever[]> {
+  return request('/api/leviers')
+}
+
+export function createSimulation(levers: Record<string, number>): Promise<Simulation> {
+  return request('/api/simulations', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ leviers: levers }),
+  })
+}
+
+export function fetchSimulation(id: string): Promise<Simulation> {
+  return request(`/api/simulations/${encodeURIComponent(id)}`)
 }

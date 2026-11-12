@@ -4,7 +4,8 @@ Un bac à sable pour composer un programme fiscal et social, puis voir son effet
 d'une vingtaine de foyers types, calculé avec les règles socio-fiscales françaises
 ([OpenFisca-France](https://github.com/openfisca/openfisca-france)).
 
-> **État : jalon J0 (squelette).** Le site n'affiche pour l'instant que l'état des services.
+> **État : jalons J0 à J3.** On peut composer un programme, le simuler et partager le résultat.
+> Restent à venir : les témoignages fictifs (J4), la page Méthode et la mise en ligne (J5).
 
 ## Ce que l'outil est, et ce qu'il n'est pas
 
@@ -33,8 +34,8 @@ Prérequis : Docker.
 docker compose up --build
 ```
 
-Puis ouvrir <http://localhost:3000> : la page affiche l'état du backend et du moteur, avec les
-versions d'OpenFisca. Les ports se changent en copiant `.env.example` en `.env`.
+Puis ouvrir <http://localhost:3000>, régler quelques leviers et cliquer sur « Simuler ». La première
+simulation prend quelques secondes (chargement de la législation). Les ports se changent en copiant `.env.example` en `.env`.
 
 ## Lancer les tests
 
