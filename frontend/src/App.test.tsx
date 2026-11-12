@@ -63,6 +63,19 @@ const simulation = {
   ],
 }
 
+const reactions = {
+  actif: true,
+  generateur: 'ia',
+  reactions: [
+    {
+      foyer: 'seul-smic',
+      ressenti: -1,
+      temoignage: 'Trois cents euros de moins, il faudra surveiller les courses.',
+      raison: 'Le revenu disponible baisse de 300 € par an.',
+    },
+  ],
+}
+
 function json(body: unknown, status = 200) {
   return Promise.resolve({ ok: status < 400, status, json: async () => body })
 }
@@ -73,6 +86,7 @@ beforeEach(() => {
   fetchMock = vi.fn((url: string, init?: RequestInit) => {
     if (url === '/api/leviers') return json(levers)
     if (url === '/api/simulations' && init?.method === 'POST') return json(simulation, 201)
+    if (url === '/api/simulations/abcd2345/reactions') return json(reactions)
     if (url === '/api/simulations/abcd2345') return json(simulation)
     return json({ detail: 'Simulation introuvable.' }, 404)
   })
@@ -140,4 +154,39 @@ test('a failed simulation shows the error and lets the user retry', async () => 
 
   expect(await screen.findByText('Trop de simulations en peu de temps.')).toBeTruthy()
   await waitFor(() => expect((screen.getByRole('button', { name: 'Simuler' }) as HTMLButtonElement).disabled).toBe(false))
+})
+
+test('testimonials are labelled as fictional and AI-generated, never as a poll', async () => {
+  window.history.pushState(null, '', '/s/abcd2345')
+
+  render(<App />)
+
+  expect(await screen.findByText(/Trois cents euros de moins/)).toBeTruthy()
+  expect(screen.getByText('Témoignage fictif généré par IA')).toBeTruthy()
+  expect(screen.getByText(/Plutôt défavorable pour le budget du foyer/)).toBeTruthy()
+  expect(document.body.textContent).toContain('ni un sondage')
+})
+
+test('template testimonials are not presented as AI-generated', async () => {
+  fetchMock.mockImplementation((url: string) =>
+    url.endsWith('/reactions') ? json({ ...reactions, generateur: 'factice' }) : json(simulation),
+  )
+  window.history.pushState(null, '', '/s/abcd2345')
+
+  render(<App />)
+
+  expect(await screen.findByText("Témoignage fictif — texte d'exemple automatique")).toBeTruthy()
+  expect(document.body.textContent).not.toContain('généré par IA')
+})
+
+test('results stay readable when testimonials are switched off or fail', async () => {
+  fetchMock.mockImplementation((url: string) =>
+    url.endsWith('/reactions') ? json({ actif: false, generateur: 'factice', reactions: [] }) : json(simulation),
+  )
+  window.history.pushState(null, '', '/s/abcd2345')
+
+  render(<App />)
+
+  await screen.findByText('Effet du programme sur 2 foyers types')
+  await waitFor(() => expect(screen.queryByText('Témoignages fictifs')).toBeNull())
 })

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ApiError, fetchSimulation, type HouseholdResult, type Simulation } from '../api.ts'
 import DeltaChart from '../components/DeltaChart.tsx'
+import Testimonials from '../components/Testimonials.tsx'
 import { AMOUNT_LABELS, formatEuros, formatLeverValue, formatSignedEuros } from '../format.ts'
 import { navigate } from '../router.ts'
 
@@ -157,6 +158,8 @@ export default function Results({ id }: { id: string }) {
           prestations sociales.
         </p>
       </section>
+
+      <Testimonials id={simulation.id} households={simulation.foyers} />
 
       <ShareLink id={simulation.id} />
 
