@@ -1,0 +1,122 @@
+{
+  "annee": 2025,
+  "leviers": [
+    {
+      "id": "ir-seuil-tranche-1",
+      "groupe": "Impôt sur le revenu",
+      "libelle": "Seuil d'entrée dans la 1re tranche imposée",
+      "description": "Revenu imposable par part au-dessus duquel l'impôt commence.",
+      "unite": "€",
+      "valeurActuelle": 11600,
+      "min": 8000,
+      "max": 20000,
+      "pas": 100,
+      "facteur": 1,
+      "parametre": "impot_revenu.bareme_ir_depuis_1945.bareme.brackets[1].threshold"
+    },
+    {
+      "id": "ir-taux-tranche-1",
+      "groupe": "Impôt sur le revenu",
+      "libelle": "Taux de la 1re tranche imposée",
+      "description": "Taux appliqué à la part du revenu située dans la première tranche imposée.",
+      "unite": "%",
+      "valeurActuelle": 11,
+      "min": 0,
+      "max": 25,
+      "pas": 0.5,
+      "facteur": 0.01,
+      "parametre": "impot_revenu.bareme_ir_depuis_1945.bareme.brackets[1].rate"
+    },
+    {
+      "id": "ir-taux-tranche-2",
+      "groupe": "Impôt sur le revenu",
+      "libelle": "Taux de la 2e tranche imposée",
+      "description": "Taux appliqué à la part du revenu située dans la deuxième tranche imposée.",
+      "unite": "%",
+      "valeurActuelle": 30,
+      "min": 15,
+      "max": 45,
+      "pas": 0.5,
+      "facteur": 0.01,
+      "parametre": "impot_revenu.bareme_ir_depuis_1945.bareme.brackets[2].rate"
+    },
+    {
+      "id": "ir-taux-tranche-3",
+      "groupe": "Impôt sur le revenu",
+      "libelle": "Taux de la 3e tranche imposée",
+      "description": "Taux appliqué à la part du revenu située dans la troisième tranche imposée.",
+      "unite": "%",
+      "valeurActuelle": 41,
+      "min": 30,
+      "max": 55,
+      "pas": 0.5,
+      "facteur": 0.01,
+      "parametre": "impot_revenu.bareme_ir_depuis_1945.bareme.brackets[3].rate"
+    },
+    {
+      "id": "ir-taux-tranche-4",
+      "groupe": "Impôt sur le revenu",
+      "libelle": "Taux de la dernière tranche",
+      "description": "Taux appliqué à la part du revenu située dans la tranche la plus haute.",
+      "unite": "%",
+      "valeurActuelle": 45,
+      "min": 41,
+      "max": 65,
+      "pas": 0.5,
+      "facteur": 0.01,
+      "parametre": "impot_revenu.bareme_ir_depuis_1945.bareme.brackets[4].rate"
+    },
+    {
+      "id": "csg-activite-deductible",
+      "groupe": "CSG",
+      "libelle": "Taux de CSG déductible sur les revenus d'activité",
+      "description": "Part déductible de la CSG prélevée sur les salaires. La part non déductible (2,4 %) n'est pas modifiée.",
+      "unite": "%",
+      "valeurActuelle": 6.8,
+      "min": 3,
+      "max": 12,
+      "pas": 0.1,
+      "facteur": 0.01,
+      "parametre": "prelevements_sociaux.contributions_sociales.csg.activite.deductible"
+    },
+    {
+      "id": "rsa-montant-forfaitaire",
+      "groupe": "Minima sociaux",
+      "libelle": "Montant forfaitaire du RSA",
+      "description": "Montant mensuel de base pour une personne seule sans enfant.",
+      "unite": "€/mois",
+      "valeurActuelle": 646.52,
+      "min": 400,
+      "max": 1000,
+      "pas": 5,
+      "facteur": 1,
+      "parametre": "prestations_sociales.solidarite_insertion.minima_sociaux.rsa.rsa_m.montant_de_base_du_rsa"
+    },
+    {
+      "id": "prime-activite-montant-base",
+      "groupe": "Minima sociaux",
+      "libelle": "Montant de base de la prime d'activité",
+      "description": "Montant forfaitaire mensuel pour une personne seule sans enfant.",
+      "unite": "€/mois",
+      "valeurActuelle": 633.21,
+      "min": 400,
+      "max": 1000,
+      "pas": 5,
+      "facteur": 1,
+      "parametre": "prestations_sociales.solidarite_insertion.minima_sociaux.ppa.pa_m.montant_de_base"
+    },
+    {
+      "id": "allocations-familiales-base",
+      "groupe": "Famille",
+      "libelle": "Base mensuelle des allocations familiales",
+      "description": "Base de calcul (BMAF) dont dépendent les allocations familiales et d'autres prestations familiales.",
+      "unite": "€/mois",
+      "valeurActuelle": 474.37,
+      "min": 300,
+      "max": 700,
+      "pas": 5,
+      "facteur": 1,
+      "parametre": "prestations_sociales.prestations_familiales.bmaf.bmaf"
+    }
+  ]
+}
