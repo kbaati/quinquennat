@@ -7,14 +7,37 @@ services:
     ports:
       - "${MOTEUR_PORT:-8000}:8000"
 
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: quinquennat
+      POSTGRES_USER: quinquennat
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-quinquennat}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U quinquennat"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
   backend:
-    build: ./backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
     environment:
       MOTEUR_URL: http://moteur:8000
+      DATABASE_URL: jdbc:postgresql://db:5432/quinquennat
+      DATABASE_USER: quinquennat
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-quinquennat}
+      FORWARD_HEADERS_STRATEGY: native
     ports:
       - "${BACKEND_PORT:-8080}:8080"
     depends_on:
-      - moteur
+      moteur:
+        condition: service_started
+      db:
+        condition: service_healthy
 
   frontend:
     build: ./frontend
@@ -22,3 +45,6 @@ services:
       - "${FRONTEND_PORT:-3000}:80"
     depends_on:
       - backend
+
+volumes:
+  db-data:
