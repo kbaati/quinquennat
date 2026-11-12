@@ -4,26 +4,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import fr.quinquennat.backend.engine.EngineHealth;
-import fr.quinquennat.backend.engine.EngineUnavailableException;
+import fr.quinquennat.backend.engine.FakeEngineClient;
 
 class HealthControllerTest {
 
+    private final FakeEngineClient engine = new FakeEngineClient();
+    private final HealthController controller = new HealthController(engine);
+
     @Test
     void reportsEngineVersionsWhenEngineAnswers() {
-        HealthController controller = new HealthController(() -> new EngineHealth("ok", "46.0.1", "176.1.10"));
-
         HealthResponse response = controller.health();
 
         assertThat(response.backend()).isEqualTo("ok");
-        assertThat(response.engine()).isEqualTo(new HealthResponse.Engine("ok", "46.0.1", "176.1.10"));
+        assertThat(response.engine()).isEqualTo(new HealthResponse.Engine("ok", "44.7.1", "176.1.10"));
     }
 
     @Test
     void reportsEngineUnavailableWithoutFailing() {
-        HealthController controller = new HealthController(() -> {
-            throw new EngineUnavailableException("down", null);
-        });
+        engine.available = false;
 
         HealthResponse response = controller.health();
 
