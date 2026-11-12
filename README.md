@@ -40,7 +40,7 @@ versions d'OpenFisca. Les ports se changent en copiant `.env.example` en `.env`.
 
 ```bash
 # Moteur (pytest, dans Docker : aucune installation locale de Python)
-docker build --target test -t quinquennat-moteur-test moteur
+docker build -f moteur/Dockerfile --target test -t quinquennat-moteur-test .
 docker run --rm quinquennat-moteur-test
 
 # Backend (JUnit, Java 21 requis ; Maven est fourni par le Maven Wrapper)

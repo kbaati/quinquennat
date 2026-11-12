@@ -1,0 +1,301 @@
+{
+  "annee": 2025,
+  "foyers": [
+    {
+      "id": "seul-sans-revenu",
+      "nom": "Personne seule sans revenu",
+      "description": "40 ans, sans emploi ni allocation chômage, locataire (400 € de loyer).",
+      "situation": {
+        "individus": {"adulte": {"date_naissance": "1985-01-01"}},
+        "menage": {"personne_de_reference": ["adulte"], "loyer": 400, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte"]},
+        "foyer_fiscal": {"declarants": ["adulte"]}
+      }
+    },
+    {
+      "id": "seul-mi-temps",
+      "nom": "Personne seule à mi-temps au SMIC",
+      "description": "35 ans, salariée à mi-temps (900 € brut par mois), locataire (450 € de loyer).",
+      "situation": {
+        "individus": {"adulte": {"date_naissance": "1990-01-01", "salaire_de_base": 900, "activite": "actif"}},
+        "menage": {"personne_de_reference": ["adulte"], "loyer": 450, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte"]},
+        "foyer_fiscal": {"declarants": ["adulte"]}
+      }
+    },
+    {
+      "id": "seul-smic",
+      "nom": "Personne seule au SMIC",
+      "description": "40 ans, salariée à temps plein au SMIC (1 802 € brut par mois), locataire (550 € de loyer).",
+      "situation": {
+        "individus": {"adulte": {"date_naissance": "1985-01-01", "salaire_de_base": 1802, "activite": "actif"}},
+        "menage": {"personne_de_reference": ["adulte"], "loyer": 550, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte"]},
+        "foyer_fiscal": {"declarants": ["adulte"]}
+      }
+    },
+    {
+      "id": "jeune-actif",
+      "nom": "Jeune actif",
+      "description": "24 ans, salarié (2 100 € brut par mois), locataire (600 € de loyer).",
+      "situation": {
+        "individus": {"adulte": {"date_naissance": "2001-01-01", "salaire_de_base": 2100, "activite": "actif"}},
+        "menage": {"personne_de_reference": ["adulte"], "loyer": 600, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte"]},
+        "foyer_fiscal": {"declarants": ["adulte"]}
+      }
+    },
+    {
+      "id": "seul-salaire-median",
+      "nom": "Personne seule au salaire médian",
+      "description": "40 ans, salariée (2 700 € brut par mois), locataire (700 € de loyer).",
+      "situation": {
+        "individus": {"adulte": {"date_naissance": "1985-01-01", "salaire_de_base": 2700, "activite": "actif"}},
+        "menage": {"personne_de_reference": ["adulte"], "loyer": 700, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte"]},
+        "foyer_fiscal": {"declarants": ["adulte"]}
+      }
+    },
+    {
+      "id": "cadre-celibataire",
+      "nom": "Cadre célibataire",
+      "description": "40 ans, salarié (5 500 € brut par mois), locataire (1 100 € de loyer).",
+      "situation": {
+        "individus": {"adulte": {"date_naissance": "1985-01-01", "salaire_de_base": 5500, "activite": "actif"}},
+        "menage": {"personne_de_reference": ["adulte"], "loyer": 1100, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte"]},
+        "foyer_fiscal": {"declarants": ["adulte"]}
+      }
+    },
+    {
+      "id": "cadre-superieur-celibataire",
+      "nom": "Cadre supérieur célibataire",
+      "description": "50 ans, salarié (10 000 € brut par mois), propriétaire de son logement.",
+      "situation": {
+        "individus": {"adulte": {"date_naissance": "1975-01-01", "salaire_de_base": 10000, "activite": "actif"}},
+        "menage": {"personne_de_reference": ["adulte"], "statut_occupation_logement": "proprietaire"},
+        "famille": {"parents": ["adulte"]},
+        "foyer_fiscal": {"declarants": ["adulte"]}
+      }
+    },
+    {
+      "id": "tres-hauts-revenus",
+      "nom": "Personne seule à très hauts revenus",
+      "description": "50 ans, salariée (25 000 € brut par mois), propriétaire de son logement.",
+      "situation": {
+        "individus": {"adulte": {"date_naissance": "1975-01-01", "salaire_de_base": 25000, "activite": "actif"}},
+        "menage": {"personne_de_reference": ["adulte"], "statut_occupation_logement": "proprietaire"},
+        "famille": {"parents": ["adulte"]},
+        "foyer_fiscal": {"declarants": ["adulte"]}
+      }
+    },
+    {
+      "id": "etudiant-salarie",
+      "nom": "Étudiant salarié à temps partiel",
+      "description": "21 ans, étudiant avec un emploi à temps partiel (600 € brut par mois), locataire (450 € de loyer).",
+      "situation": {
+        "individus": {"adulte": {"date_naissance": "2004-01-01", "salaire_de_base": 600, "activite": "etudiant", "etudiant": true}},
+        "menage": {"personne_de_reference": ["adulte"], "loyer": 450, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte"]},
+        "foyer_fiscal": {"declarants": ["adulte"]}
+      }
+    },
+    {
+      "id": "demandeur-emploi",
+      "nom": "Demandeur d'emploi indemnisé",
+      "description": "45 ans, allocation chômage de 1 300 € brut par mois, locataire (500 € de loyer).",
+      "situation": {
+        "individus": {"adulte": {"date_naissance": "1980-01-01", "chomage_brut": 1300, "activite": "chomeur"}},
+        "menage": {"personne_de_reference": ["adulte"], "loyer": 500, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte"]},
+        "foyer_fiscal": {"declarants": ["adulte"]}
+      }
+    },
+    {
+      "id": "parent-isole-sans-revenu",
+      "nom": "Parent isolé sans revenu, un enfant",
+      "description": "30 ans, sans emploi, un enfant de 4 ans, locataire (500 € de loyer).",
+      "situation": {
+        "individus": {
+          "adulte": {"date_naissance": "1995-01-01"},
+          "enfant1": {"date_naissance": "2021-01-01"}
+        },
+        "menage": {"personne_de_reference": ["adulte"], "enfants": ["enfant1"], "loyer": 500, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte"], "enfants": ["enfant1"]},
+        "foyer_fiscal": {"declarants": ["adulte"], "personnes_a_charge": ["enfant1"], "caseT": true}
+      }
+    },
+    {
+      "id": "parent-isole-smic",
+      "nom": "Parent isolé au SMIC, deux enfants",
+      "description": "38 ans, salarié au SMIC (1 802 € brut par mois), deux enfants de 6 et 9 ans, locataire (650 € de loyer).",
+      "situation": {
+        "individus": {
+          "adulte": {"date_naissance": "1987-01-01", "salaire_de_base": 1802, "activite": "actif"},
+          "enfant1": {"date_naissance": "2016-01-01"},
+          "enfant2": {"date_naissance": "2019-01-01"}
+        },
+        "menage": {"personne_de_reference": ["adulte"], "enfants": ["enfant1", "enfant2"], "loyer": 650, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte"], "enfants": ["enfant1", "enfant2"]},
+        "foyer_fiscal": {"declarants": ["adulte"], "personnes_a_charge": ["enfant1", "enfant2"], "caseT": true}
+      }
+    },
+    {
+      "id": "parent-isole-salaire-median",
+      "nom": "Parent isolé au salaire médian, un enfant",
+      "description": "42 ans, salarié (2 700 € brut par mois), un enfant de 10 ans, locataire (750 € de loyer).",
+      "situation": {
+        "individus": {
+          "adulte": {"date_naissance": "1983-01-01", "salaire_de_base": 2700, "activite": "actif"},
+          "enfant1": {"date_naissance": "2015-01-01"}
+        },
+        "menage": {"personne_de_reference": ["adulte"], "enfants": ["enfant1"], "loyer": 750, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte"], "enfants": ["enfant1"]},
+        "foyer_fiscal": {"declarants": ["adulte"], "personnes_a_charge": ["enfant1"], "caseT": true}
+      }
+    },
+    {
+      "id": "couple-un-smic",
+      "nom": "Couple avec un seul SMIC, sans enfant",
+      "description": "Couple marié de 45 ans, un salaire au SMIC (1 802 € brut par mois), locataire (600 € de loyer).",
+      "situation": {
+        "individus": {
+          "adulte1": {"date_naissance": "1980-01-01", "salaire_de_base": 1802, "activite": "actif", "statut_marital": "marie"},
+          "adulte2": {"date_naissance": "1980-06-01", "statut_marital": "marie"}
+        },
+        "menage": {"personne_de_reference": ["adulte1"], "conjoint": ["adulte2"], "loyer": 600, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte1", "adulte2"]},
+        "foyer_fiscal": {"declarants": ["adulte1", "adulte2"]}
+      }
+    },
+    {
+      "id": "couple-deux-smic-deux-enfants",
+      "nom": "Couple avec deux SMIC, deux enfants",
+      "description": "Couple marié de 35 ans, deux salaires au SMIC, deux enfants de 5 et 8 ans, locataire (750 € de loyer).",
+      "situation": {
+        "individus": {
+          "adulte1": {"date_naissance": "1990-01-01", "salaire_de_base": 1802, "activite": "actif", "statut_marital": "marie"},
+          "adulte2": {"date_naissance": "1990-06-01", "salaire_de_base": 1802, "activite": "actif", "statut_marital": "marie"},
+          "enfant1": {"date_naissance": "2017-01-01"},
+          "enfant2": {"date_naissance": "2020-01-01"}
+        },
+        "menage": {"personne_de_reference": ["adulte1"], "conjoint": ["adulte2"], "enfants": ["enfant1", "enfant2"], "loyer": 750, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte1", "adulte2"], "enfants": ["enfant1", "enfant2"]},
+        "foyer_fiscal": {"declarants": ["adulte1", "adulte2"], "personnes_a_charge": ["enfant1", "enfant2"]}
+      }
+    },
+    {
+      "id": "couple-median-deux-enfants",
+      "nom": "Couple à revenus médians, deux enfants",
+      "description": "Couple marié de 40 ans, salaires de 2 700 € et 2 300 € brut par mois, deux enfants de 7 et 11 ans, locataire (900 € de loyer).",
+      "situation": {
+        "individus": {
+          "adulte1": {"date_naissance": "1985-01-01", "salaire_de_base": 2700, "activite": "actif", "statut_marital": "marie"},
+          "adulte2": {"date_naissance": "1985-06-01", "salaire_de_base": 2300, "activite": "actif", "statut_marital": "marie"},
+          "enfant1": {"date_naissance": "2014-01-01"},
+          "enfant2": {"date_naissance": "2018-01-01"}
+        },
+        "menage": {"personne_de_reference": ["adulte1"], "conjoint": ["adulte2"], "enfants": ["enfant1", "enfant2"], "loyer": 900, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte1", "adulte2"], "enfants": ["enfant1", "enfant2"]},
+        "foyer_fiscal": {"declarants": ["adulte1", "adulte2"], "personnes_a_charge": ["enfant1", "enfant2"]}
+      }
+    },
+    {
+      "id": "couple-trois-enfants",
+      "nom": "Couple avec trois enfants",
+      "description": "Couple marié de 40 ans, salaires de 3 000 € et 1 500 € brut par mois, trois enfants de 3, 8 et 12 ans, locataire (950 € de loyer).",
+      "situation": {
+        "individus": {
+          "adulte1": {"date_naissance": "1985-01-01", "salaire_de_base": 3000, "activite": "actif", "statut_marital": "marie"},
+          "adulte2": {"date_naissance": "1985-06-01", "salaire_de_base": 1500, "activite": "actif", "statut_marital": "marie"},
+          "enfant1": {"date_naissance": "2013-01-01"},
+          "enfant2": {"date_naissance": "2017-01-01"},
+          "enfant3": {"date_naissance": "2022-01-01"}
+        },
+        "menage": {"personne_de_reference": ["adulte1"], "conjoint": ["adulte2"], "enfants": ["enfant1", "enfant2", "enfant3"], "loyer": 950, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte1", "adulte2"], "enfants": ["enfant1", "enfant2", "enfant3"]},
+        "foyer_fiscal": {"declarants": ["adulte1", "adulte2"], "personnes_a_charge": ["enfant1", "enfant2", "enfant3"]}
+      }
+    },
+    {
+      "id": "couple-cadres-deux-enfants",
+      "nom": "Couple de cadres, deux enfants",
+      "description": "Couple marié de 45 ans, salaires de 5 500 € et 4 800 € brut par mois, deux enfants de 10 et 14 ans, propriétaire de son logement.",
+      "situation": {
+        "individus": {
+          "adulte1": {"date_naissance": "1980-01-01", "salaire_de_base": 5500, "activite": "actif", "statut_marital": "marie"},
+          "adulte2": {"date_naissance": "1980-06-01", "salaire_de_base": 4800, "activite": "actif", "statut_marital": "marie"},
+          "enfant1": {"date_naissance": "2011-01-01"},
+          "enfant2": {"date_naissance": "2015-01-01"}
+        },
+        "menage": {"personne_de_reference": ["adulte1"], "conjoint": ["adulte2"], "enfants": ["enfant1", "enfant2"], "statut_occupation_logement": "proprietaire"},
+        "famille": {"parents": ["adulte1", "adulte2"], "enfants": ["enfant1", "enfant2"]},
+        "foyer_fiscal": {"declarants": ["adulte1", "adulte2"], "personnes_a_charge": ["enfant1", "enfant2"]}
+      }
+    },
+    {
+      "id": "couple-aise-sans-enfant",
+      "nom": "Couple à hauts revenus, sans enfant",
+      "description": "Couple marié de 50 ans, salaires de 9 000 € et 7 000 € brut par mois, propriétaire de son logement.",
+      "situation": {
+        "individus": {
+          "adulte1": {"date_naissance": "1975-01-01", "salaire_de_base": 9000, "activite": "actif", "statut_marital": "marie"},
+          "adulte2": {"date_naissance": "1975-06-01", "salaire_de_base": 7000, "activite": "actif", "statut_marital": "marie"}
+        },
+        "menage": {"personne_de_reference": ["adulte1"], "conjoint": ["adulte2"], "statut_occupation_logement": "proprietaire"},
+        "famille": {"parents": ["adulte1", "adulte2"]},
+        "foyer_fiscal": {"declarants": ["adulte1", "adulte2"]}
+      }
+    },
+    {
+      "id": "retraite-modeste",
+      "nom": "Retraité modeste",
+      "description": "70 ans, vivant seul, pension de 1 000 € brut par mois, locataire (400 € de loyer).",
+      "situation": {
+        "individus": {"adulte": {"date_naissance": "1955-01-01", "retraite_brute": 1000, "activite": "retraite"}},
+        "menage": {"personne_de_reference": ["adulte"], "loyer": 400, "statut_occupation_logement": "locataire_vide"},
+        "famille": {"parents": ["adulte"]},
+        "foyer_fiscal": {"declarants": ["adulte"]}
+      }
+    },
+    {
+      "id": "retraite-pension-moyenne",
+      "nom": "Retraité à pension moyenne",
+      "description": "72 ans, vivant seul, pension de 1 700 € brut par mois, propriétaire de son logement.",
+      "situation": {
+        "individus": {"adulte": {"date_naissance": "1953-01-01", "retraite_brute": 1700, "activite": "retraite"}},
+        "menage": {"personne_de_reference": ["adulte"], "statut_occupation_logement": "proprietaire"},
+        "famille": {"parents": ["adulte"]},
+        "foyer_fiscal": {"declarants": ["adulte"]}
+      }
+    },
+    {
+      "id": "couple-retraites",
+      "nom": "Couple de retraités",
+      "description": "Couple marié de 70 ans, pensions de 1 800 € et 1 400 € brut par mois, propriétaire de son logement.",
+      "situation": {
+        "individus": {
+          "adulte1": {"date_naissance": "1955-01-01", "retraite_brute": 1800, "activite": "retraite", "statut_marital": "marie"},
+          "adulte2": {"date_naissance": "1955-06-01", "retraite_brute": 1400, "activite": "retraite", "statut_marital": "marie"}
+        },
+        "menage": {"personne_de_reference": ["adulte1"], "conjoint": ["adulte2"], "statut_occupation_logement": "proprietaire"},
+        "famille": {"parents": ["adulte1", "adulte2"]},
+        "foyer_fiscal": {"declarants": ["adulte1", "adulte2"]}
+      }
+    },
+    {
+      "id": "couple-retraites-aises",
+      "nom": "Couple de retraités aisés",
+      "description": "Couple marié de 70 ans, pensions de 4 000 € et 3 000 € brut par mois, propriétaire de son logement.",
+      "situation": {
+        "individus": {
+          "adulte1": {"date_naissance": "1955-01-01", "retraite_brute": 4000, "activite": "retraite", "statut_marital": "marie"},
+          "adulte2": {"date_naissance": "1955-06-01", "retraite_brute": 3000, "activite": "retraite", "statut_marital": "marie"}
+        },
+        "menage": {"personne_de_reference": ["adulte1"], "conjoint": ["adulte2"], "statut_occupation_logement": "proprietaire"},
+        "famille": {"parents": ["adulte1", "adulte2"]},
+        "foyer_fiscal": {"declarants": ["adulte1", "adulte2"]}
+      }
+    }
+  ]
+}

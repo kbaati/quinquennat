@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build test image
-        run: docker build --target test -t quinquennat-moteur-test moteur
+        run: docker build -f moteur/Dockerfile --target test -t quinquennat-moteur-test .
       - name: Run pytest
         run: docker run --rm quinquennat-moteur-test
 

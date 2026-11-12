@@ -1,7 +1,8 @@
 services:
   moteur:
     build:
-      context: ./moteur
+      context: .
+      dockerfile: moteur/Dockerfile
       target: runtime
     ports:
       - "${MOTEUR_PORT:-8000}:8000"

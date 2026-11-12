@@ -1,3 +1,4 @@
 openfisca-france==176.1.10
+openfisca-core==44.7.1
 fastapi==0.162.5
 uvicorn==0.54.0
