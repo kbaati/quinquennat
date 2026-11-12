@@ -78,3 +78,22 @@ export function createSimulation(levers: Record<string, number>): Promise<Simula
 export function fetchSimulation(id: string): Promise<Simulation> {
   return request(`/api/simulations/${encodeURIComponent(id)}`)
 }
+
+/** A fictional testimonial. `ressenti` goes from -2 (very unfavourable for the budget) to 2. */
+export interface Reaction {
+  foyer: string
+  ressenti: number
+  temoignage: string
+  raison: string
+}
+
+export interface Reactions {
+  actif: boolean
+  /** How the texts were produced: template sentences ("factice") or an AI model ("ia"). */
+  generateur: 'factice' | 'ia'
+  reactions: Reaction[]
+}
+
+export function fetchReactions(id: string): Promise<Reactions> {
+  return request(`/api/simulations/${encodeURIComponent(id)}/reactions`)
+}

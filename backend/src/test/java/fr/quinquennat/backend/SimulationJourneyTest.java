@@ -82,6 +82,22 @@ class SimulationJourneyTest {
         HttpResponse<String> shared = get("/api/simulations/" + id);
         assertThat(shared.statusCode()).isEqualTo(200);
         assertThat(mapper.readTree(shared.body())).isEqualTo(simulation);
+
+        HttpResponse<String> reactions = get("/api/simulations/" + id + "/reactions");
+        assertThat(reactions.statusCode()).isEqualTo(200);
+        JsonNode body = mapper.readTree(reactions.body());
+        assertThat(body.get("actif").asBoolean()).isTrue();
+        assertThat(body.get("generateur").asString()).isEqualTo("factice");
+        assertThat(body.get("reactions").size()).isEqualTo(simulation.get("foyers").size());
+        JsonNode first = body.get("reactions").get(0);
+        assertThat(first.get("foyer").asString()).isEqualTo(simulation.get("foyers").get(0).get("id").asString());
+        assertThat(first.get("ressenti").asInt()).isEqualTo(-1);
+        assertThat(first.get("temoignage").asString()).isNotBlank();
+        assertThat(first.get("raison").asString()).isNotBlank();
+        // Second call is served from the database cache and gives the same texts.
+        assertThat(mapper.readTree(get("/api/simulations/" + id + "/reactions").body())).isEqualTo(body);
+
+        assertThat(get("/api/simulations/zzzz9999/reactions").statusCode()).isEqualTo(404);
     }
 
     @Test

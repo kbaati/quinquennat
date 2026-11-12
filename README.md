@@ -4,14 +4,15 @@ Un bac à sable pour composer un programme fiscal et social, puis voir son effet
 d'une vingtaine de foyers types, calculé avec les règles socio-fiscales françaises
 ([OpenFisca-France](https://github.com/openfisca/openfisca-france)).
 
-> **État : jalons J0 à J3.** On peut composer un programme, le simuler et partager le résultat.
-> Restent à venir : les témoignages fictifs (J4), la page Méthode et la mise en ligne (J5).
+> **État : jalons J0 à J4.** On peut composer un programme, le simuler, lire des témoignages fictifs
+> et partager le résultat. Restent à venir : la page Méthode et la mise en ligne (J5).
 
 ## Ce que l'outil est, et ce qu'il n'est pas
 
 - Il calcule un avant / après en euros par an pour des **foyers types**. Ce n'est pas un
   échantillon représentatif de la population, et il ne chiffre pas de coût budgétaire national.
 - Ce n'est **pas un sondage** : aucune intention de vote, aucune estimation d'opinion.
+  Les réactions affichées sont des **témoignages fictifs**, étiquetés comme tels partout.
 - Il est **neutre** : aucun parti, aucun candidat, aucun jugement de valeur.
 - Il ne collecte **aucune donnée personnelle** : pas de compte, pas de cookie de suivi,
   pas d'outil de mesure d'audience tiers.
@@ -36,6 +37,23 @@ docker compose up --build
 
 Puis ouvrir <http://localhost:3000>, régler quelques leviers et cliquer sur « Simuler ». La première
 simulation prend quelques secondes (chargement de la législation). Les ports se changent en copiant `.env.example` en `.env`.
+
+## Témoignages fictifs
+
+Pour chaque foyer type dont le budget change, l'outil affiche un court témoignage fictif, un ressenti
+de −2 à +2 et la raison chiffrée. Le texte est écrit à partir du foyer et de son écart en euros,
+rien d'autre : ni le programme, ni aucun contexte politique ne sont transmis au générateur.
+
+| Variable               | Rôle                                                                 |
+| ---------------------- | -------------------------------------------------------------------- |
+| `REACTIONS_ENABLED`    | `false` désactive entièrement les témoignages                        |
+| `REACTIONS_GENERATOR`  | `fake` (défaut : phrases d'exemple, aucun appel à une IA) ou `anthropic` |
+| `REACTIONS_MAX_PER_DAY`| Plafond de témoignages générés par jour (défaut : 2000)              |
+| `ANTHROPIC_API_KEY`    | Clé API, requise avec `anthropic`. Jamais dans le dépôt              |
+| `ANTHROPIC_MODEL`      | Identifiant du modèle, requis avec `anthropic`                       |
+
+Chaque témoignage est généré une seule fois par couple (programme, foyer), puis relu depuis la base.
+L'étiquette affichée dit comment le texte a été produit : « généré par IA » ou « texte d'exemple automatique ».
 
 ## Lancer les tests
 
