@@ -1,5 +1,7 @@
 """Thin, stateless HTTP layer over OpenFisca-France. No product logic here."""
 
+import threading
+from contextlib import asynccontextmanager
 from importlib.metadata import version
 
 from fastapi import FastAPI, HTTPException
@@ -7,7 +9,14 @@ from pydantic import BaseModel, Field
 
 from app import simulation
 
-app = FastAPI(title="Quinquennat - moteur", docs_url=None, redoc_url=None)
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    # Loading the legislation takes a few seconds: do it before the first request, without blocking /sante.
+    threading.Thread(target=simulation.baseline_system, daemon=True).start()
+    yield
+
+
+app = FastAPI(title="Quinquennat - moteur", docs_url=None, redoc_url=None, lifespan=lifespan)
 
 
 def versions() -> dict[str, str]:
