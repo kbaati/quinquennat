@@ -13,6 +13,7 @@ const levers = [
     min: 0,
     max: 25,
     pas: 0.5,
+    parametre: 'impot_revenu.bareme_ir_depuis_1945.bareme.brackets[1].rate',
   },
   {
     id: 'rsa-montant-forfaitaire',
@@ -24,6 +25,7 @@ const levers = [
     min: 400,
     max: 1000,
     pas: 5,
+    parametre: 'prestations_sociales.solidarite_insertion.minima_sociaux.rsa.rsa_m.montant_de_base_du_rsa',
   },
 ]
 
@@ -85,6 +87,9 @@ let fetchMock: ReturnType<typeof vi.fn>
 beforeEach(() => {
   fetchMock = vi.fn((url: string, init?: RequestInit) => {
     if (url === '/api/leviers') return json(levers)
+    if (url === '/api/foyers') return json(simulation.foyers.map(({ id, nom, description }) => ({ id, nom, description })))
+    if (url === '/api/sante')
+      return json({ backend: 'ok', engine: { status: 'ok', openfiscaCore: '44.7.1', openfiscaFrance: '176.1.10' } })
     if (url === '/api/simulations' && init?.method === 'POST') return json(simulation, 201)
     if (url === '/api/simulations/abcd2345/reactions') return json(reactions)
     if (url === '/api/simulations/abcd2345') return json(simulation)
@@ -189,4 +194,29 @@ test('results stay readable when testimonials are switched off or fail', async (
 
   await screen.findByText('Effet du programme sur 2 foyers types')
   await waitFor(() => expect(screen.queryByText('Témoignages fictifs')).toBeNull())
+})
+
+test('the method page traces every lever to its OpenFisca parameter and states the limits', async () => {
+  window.history.pushState(null, '', '/methode')
+
+  render(<App />)
+
+  expect(await screen.findByText('impot_revenu.bareme_ir_depuis_1945.bareme.brackets[1].rate')).toBeTruthy()
+  expect(await screen.findByText(/OpenFisca-France 176\.1\.10/)).toBeTruthy()
+  expect(await screen.findByText(/Les 2 foyers types/)).toBeTruthy()
+  expect(screen.getByText('Pas un échantillon représentatif.')).toBeTruthy()
+  expect(screen.getByText('Pas un sondage.')).toBeTruthy()
+  expect(screen.getByText('Pas un chiffrage budgétaire.')).toBeTruthy()
+  expect(screen.getByText('Ces témoignages sont fictifs')).toBeTruthy()
+  expect(document.title).toBe('Méthode — Quinquennat')
+})
+
+test('the header links to the method page without reloading', async () => {
+  render(<App />)
+  await screen.findByLabelText('Taux de la 1re tranche imposée')
+
+  fireEvent.click(screen.getByRole('link', { name: 'Méthode' }))
+
+  expect(await screen.findByRole('heading', { name: 'Méthode' })).toBeTruthy()
+  expect(window.location.pathname).toBe('/methode')
 })
