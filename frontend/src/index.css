@@ -518,3 +518,47 @@ tbody th {
   font-weight: 600;
   color: var(--text);
 }
+
+/* Navigation */
+
+.site-nav {
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
+}
+
+.site-nav a,
+.site-footer a,
+.method a,
+.note a {
+  color: var(--accent);
+}
+
+.site-nav a[aria-current='page'] {
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Method page */
+
+.method li {
+  margin-bottom: 0.4rem;
+}
+
+.method ul {
+  padding-left: 1.25rem;
+}
+
+code {
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
+}
+
+code.parameter {
+  display: block;
+  margin-top: 0.2rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
