@@ -8,6 +8,19 @@ export interface Lever {
   min: number
   max: number
   pas: number
+  /** OpenFisca-France parameter this lever changes. */
+  parametre: string
+}
+
+export interface Household {
+  id: string
+  nom: string
+  description: string
+}
+
+export interface Health {
+  backend: string
+  engine: { status: string; openfiscaCore: string | null; openfiscaFrance: string | null }
 }
 
 export type Amounts = Record<string, number>
@@ -65,6 +78,14 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export function fetchLevers(): Promise<Lever[]> {
   return request('/api/leviers')
+}
+
+export function fetchHouseholds(): Promise<Household[]> {
+  return request('/api/foyers')
+}
+
+export function fetchHealth(): Promise<Health> {
+  return request('/api/sante')
 }
 
 export function createSimulation(levers: Record<string, number>): Promise<Simulation> {

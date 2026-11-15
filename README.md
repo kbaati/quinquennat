@@ -4,8 +4,8 @@ Un bac à sable pour composer un programme fiscal et social, puis voir son effet
 d'une vingtaine de foyers types, calculé avec les règles socio-fiscales françaises
 ([OpenFisca-France](https://github.com/openfisca/openfisca-france)).
 
-> **État : jalons J0 à J4.** On peut composer un programme, le simuler, lire des témoignages fictifs
-> et partager le résultat. Restent à venir : la page Méthode et la mise en ligne (J5).
+> **État : MVP complet en local (jalons J0 à J5).** On peut composer un programme, le simuler, lire des
+> témoignages fictifs, partager le résultat et consulter la page Méthode. Le site n'est pas encore en ligne.
 
 ## Ce que l'outil est, et ce qu'il n'est pas
 
