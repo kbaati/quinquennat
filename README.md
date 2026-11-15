@@ -4,8 +4,27 @@ Un bac à sable pour composer un programme fiscal et social, puis voir son effet
 d'une vingtaine de foyers types, calculé avec les règles socio-fiscales françaises
 ([OpenFisca-France](https://github.com/openfisca/openfisca-france)).
 
-> **État : MVP complet en local (jalons J0 à J5).** On peut composer un programme, le simuler, lire des
-> témoignages fictifs, partager le résultat et consulter la page Méthode. Le site n'est pas encore en ligne.
+> **État : projet mis en pause (novembre 2026), jamais déployé.** Le MVP fonctionne en local : on peut
+> composer un programme, le simuler, lire des témoignages fictifs, partager le résultat et consulter la page
+> Méthode. Il n'a pas été mis en ligne, et l'idée elle-même n'a pas été testée auprès d'utilisateurs.
+> Le bilan complet est dans [`docs/BILAN.md`](docs/BILAN.md).
+
+## Ce qui marche, ce qui n'est pas vérifié
+
+**Solide** : le moteur de réformes paramétriques (OpenFisca-France 176.1.10, année 2025), le catalogue de
+23 foyers types et de 9 leviers, les simulations partageables stockées en base, la limite de débit, la
+page Méthode, 58 tests automatiques et la CI GitHub Actions.
+
+**Non vérifié** :
+
+- L'implémentation Anthropic des témoignages (`REACTIONS_GENERATOR=anthropic`) compile, mais n'a jamais appelé
+  la vraie API. Par défaut, ce sont des phrases d'exemple.
+- Les montants des foyers types sont plausibles et testés par fourchettes, mais pas recoupés un par un avec
+  un simulateur officiel.
+- Aucun test avec de vrais utilisateurs : l'intérêt du produit est une hypothèse.
+
+**Pistes si le projet reprend** : répondre à « et moi, combien ? » (un foyer saisi par l'utilisateur, sans rien
+stocker), réduire ou retirer les témoignages fictifs, un vrai travail de design et de partage.
 
 ## Ce que l'outil est, et ce qu'il n'est pas
 
